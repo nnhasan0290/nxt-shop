@@ -6,7 +6,7 @@ import { localHostState } from "../../redux/actions/cartAction";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const products = useSelector(state => state.cart.allcartItems);
+  const products = useSelector((state) => state.cart.allcartItems);
   useEffect(() => {
     dispatch(localHostState(JSON.parse(localStorage.getItem("cartItems"))));
   }, []);
@@ -31,13 +31,11 @@ const Cart = () => {
             <SingleCartItem key={i} product={each} index={i} />
           ))}
       </div>
-          {
-            products.length === 0 && (
-              <div className="p-10 my-10 text-xl text-center bg-white">
-                <h2>No products has been added yet</h2>
-              </div>
-            )
-          }
+      {products && (
+        <div className="p-10 my-10 text-xl text-center bg-white">
+          <h2>No products has been added yet</h2>
+        </div>
+      )}
       <div className="justify-between py-10 md:flex">
         <div className="">
           <div className="p-10 bg-white rounded-sm border shadow-3xl">
@@ -53,7 +51,7 @@ const Cart = () => {
           </div>
         </div>
         <div className="flex flex-col">
-          {products.length>0 && (
+          {!products && (
             <button className="text-white my-5 bg-[#0167f3] hover:bg-[#081828] transition duration-300 px-5 py-2 text-xl rounded-sm">
               <Link href={"/checkout"}>Proceed to checkout</Link>
             </button>

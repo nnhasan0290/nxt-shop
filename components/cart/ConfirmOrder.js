@@ -4,12 +4,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 
 const ConfirmOrder = () => {
+  const totalAmount = 0;
   const { shippingInfo, allcartItems } = useSelector((state) => state.cart);
   const router = useRouter();
   const dispatch = useDispatch();
-    const totalAmount = allcartItems.reduce((total, each) => {
-    return total + each.quantity * each.price;
-  }, 0);
+  if (allcartItems) {
+    totalAmount = allcartItems.reduce((total, each) => {
+      return total + each.quantity * each.price;
+    }, 0);
+  }
   return (
     <div className="md:p-10 bg-[#f9f9f9] capitalize">
       <div className="hidden py-5 bg-white shadow-3xl sm:block">
@@ -36,7 +39,7 @@ const ConfirmOrder = () => {
                 return (
                   <div
                     key={i}
-                    className="flex justify-between items-center my-5"
+                    className="flex items-center justify-between my-5"
                   >
                     <div className="flex items-center space-x-5">
                       <img
