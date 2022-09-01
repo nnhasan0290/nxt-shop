@@ -12,7 +12,7 @@ const Login = () => {
   const { loading, error, data } = useSelector((state) => state.loginUser);
   const { isAuthenticated, user } = useSelector((state) => state.loadUser);
 
-  const { success } = useSelector((state) => state.logoutUser);
+  const { success, message } = useSelector((state) => state.logoutUser);
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -32,7 +32,7 @@ const Login = () => {
     }
     dispatch(loadUser());
     if (success) {
-      alert.show(isLoggedOut.message);
+      alert.show(message);
       dispatch({ type: "CLEAR_LOGGED_MESSAGE" });
     }
   }, [error, data, success]);
