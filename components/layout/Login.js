@@ -10,7 +10,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { loading, error, data } = useSelector((state) => state.loginUser);
-  const { isAuthenticated, user } = useSelector((state) => state.loadUser);
 
   const { success, message } = useSelector((state) => state.logoutUser);
 
@@ -30,7 +29,6 @@ const Login = () => {
     if (error) {
       alert.error(error);
     }
-    dispatch(loadUser());
     if (success) {
       alert.show(message);
       dispatch({ type: "CLEAR_LOGGED_MESSAGE" });
