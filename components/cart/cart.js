@@ -31,14 +31,9 @@ const Cart = () => {
             <SingleCartItem key={i} product={each} index={i} />
           ))}
       </div>
-      {products && (
-        <div className="p-10 my-10 text-xl text-center bg-white">
-          <h2>No products has been added yet</h2>
-        </div>
-      )}
       <div className="justify-between py-10 md:flex">
         <div className="">
-          <div className="p-10 bg-white rounded-sm border shadow-3xl">
+          <div className="p-10 bg-white border rounded-sm shadow-3xl">
             <form action="" className="h-full rounded-md sm:flex">
               <input className="h-full border" type="text" />
               <button
@@ -51,11 +46,9 @@ const Cart = () => {
           </div>
         </div>
         <div className="flex flex-col">
-          {!products && (
-            <button className="text-white my-5 bg-[#0167f3] hover:bg-[#081828] transition duration-300 px-5 py-2 text-xl rounded-sm">
-              <Link href={"/checkout"}>Proceed to checkout</Link>
-            </button>
-          )}
+          <button className="text-white my-5 bg-[#0167f3] hover:bg-[#081828] transition duration-300 px-5 py-2 text-xl rounded-sm">
+            <Link href={"/checkout"}>Proceed to checkout</Link>
+          </button>
           <button className="text-white bg-[#0167f3] hover:bg-[#081828] transition duration-300 px-5 py-2 text-xl rounded-sm">
             <Link href={"/product"}>Continue Shopping</Link>
           </button>
