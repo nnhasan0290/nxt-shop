@@ -7,8 +7,7 @@ export default () => (
     <Head>
       <title>login</title>
     </Head>
-    <Heading />
-    <Login/>
-    <Contact/>
+    <Login />
+    <Contact />
   </>
 );
