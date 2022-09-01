@@ -12,7 +12,7 @@ const Login = () => {
   const { loading, error, data } = useSelector((state) => state.loginUser);
   const { isAuthenticated, user } = useSelector((state) => state.loadUser);
 
-  const isLoggedOut = useSelector((state) => state.logoutUser);
+  const { success } = useSelector((state) => state.logoutUser);
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -31,18 +31,17 @@ const Login = () => {
       alert.error(error);
     }
     dispatch(loadUser());
-    if (isLoggedOut.success) {
+    if (success) {
       alert.show(isLoggedOut.message);
       dispatch({ type: "CLEAR_LOGGED_MESSAGE" });
     }
-  }, [error, data, isLoggedOut]);
+  }, [error, data, success]);
   return (
     <div className="flex justify-center items-center bg-[#f9f9f9]">
-      <div className="p-5 my-10 bg-white rounded-sm border shadow-3xl md:basis-1/2">
+      <div className="p-5 my-10 bg-white border rounded-sm shadow-3xl md:basis-1/2">
         {isAuthenticated ? (
           <div>
             <p>
-              {" "}
               You are logged in as{" "}
               <span className="text-lg uppercase text-[#081828] p-5">
                 {user.fname + " " + user.lname}
@@ -100,7 +99,7 @@ const Login = () => {
                 className="cursor-pointer bg-[#0167f3] text-white hover:bg-[#081828] transition duration-300"
               />
             </form>
-            <div className="flex justify-center items-center my-3 space-x-3">
+            <div className="flex items-center justify-center my-3 space-x-3">
               <p>Don't have an account?</p>
               <div className="text-[#0167f3]">
                 <Link href="/register"> Register</Link>
