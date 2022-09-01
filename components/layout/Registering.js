@@ -1,9 +1,8 @@
-
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { createUserAction } from "../../redux/actions/userAction";
-import {useDispatch, useSelector} from "react-redux";
-import {useRouter} from "next/router";
-import {useAlert} from "react-alert";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import { useAlert } from "react-alert";
 
 const Registering = () => {
   const [fname, setFname] = useState("");
@@ -16,8 +15,8 @@ const Registering = () => {
   const alert = useAlert();
 
   const dispatch = useDispatch();
-  const {error,success} = useSelector(state => state.newUser);
-  console.log(error,success);
+  const { error, success } = useSelector((state) => state.newUser);
+  console.log(error, success);
 
   //submit handler method ====================================
   const submitHandler = (e) => {
@@ -28,7 +27,6 @@ const Registering = () => {
     register_form.set("email", email);
     register_form.set("password", password);
     register_form.set("confirmPass", confirmPass);
-    register_form.set("image", inputImg);
     dispatch(createUserAction(register_form));
   };
 
@@ -43,21 +41,20 @@ const Registering = () => {
     };
   };
   useEffect(() => {
-    if(success){
-      alert.show("Login with your email and password now")
-      setTimeout(()=>{
+    if (success) {
+      alert.show("Login with your email and password now");
+      setTimeout(() => {
         router.push("/login");
-      },1000)
-      
+      }, 1000);
     }
-    if(error){
+    if (error) {
       alert.error(error);
-      dispatch({type:"CLEAR_ERROR"});
+      dispatch({ type: "CLEAR_ERROR" });
     }
-  },[success,error])
+  }, [success, error]);
   return (
     <div className="flex justify-center items-center min-h-screen bg-[#f9f9f9]">
-      <div className="p-10 w-full bg-white border sm:w-1/2 shadow-3xl">
+      <div className="w-full p-10 bg-white border sm:w-1/2 shadow-3xl">
         <div className="p-2 my-5">
           <h2 className="text-[22px] font-bold mb-[10px] leading-[1.2] hover:cursor-auto hover:text-[#081828] semi-heading">
             No Account? Register now
@@ -132,22 +129,20 @@ const Registering = () => {
               required
             />
           </div>
-          <div className="p-2 w-full">
+          <div className="w-full p-2">
             <div className="">
               <label className="basis-[200px]" htmlFor="img">
                 Upload profile img:
               </label>
               <div>
                 <div className="flex items-center">
-                  {
-                    inputImg && (
-                      <img
-                        src={inputImg}
-                        alt="input image"
-                        className="w-[60px] h-[60px] rounded-full mr-5"
-                      />
-                    )
-                  }
+                  {inputImg && (
+                    <img
+                      src={inputImg}
+                      alt="input image"
+                      className="w-[60px] h-[60px] rounded-full mr-5"
+                    />
+                  )}
                   <input
                     onChange={fileUpload}
                     className="text-transparent  file:p-1 file:w-full file:border-none file:bg-white file:text-[#081828] border"
