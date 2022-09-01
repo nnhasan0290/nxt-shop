@@ -50,7 +50,7 @@ export const loginUser = (myForm) => async (dispatch) => {
     if (error.response) {
       dispatch({ type: LOGIN_USER_FAILED, payload: error.response.data.error });
     } else {
-      dispatch({ tyep: LOGIN_USER_FAILED, payload: error.message });
+      dispatch({ type: LOGIN_USER_FAILED, payload: error.message });
     }
   }
 };
@@ -61,7 +61,10 @@ export const loadUser = () => async (dispatch) => {
     dispatch({ type: LOAD_USER_REQ });
 
     const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_GITPOD_HOST}/api/user/load`
+      `${process.env.NEXT_PUBLIC_GITPOD_HOST}/api/user/load`,
+      {
+        withCredentials: true,
+      }
     );
 
     dispatch({ type: LOAD_USER_SUCCESS, payload: data });
