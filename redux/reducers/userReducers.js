@@ -33,11 +33,16 @@ export const newUserReducer = (state = {}, action) => {
         error: action.payload,
       };
       break;
+    case "CLEAR_SUCCESS":
+      return {
+        ...state,
+        success: false,
+      };
     case "CLEAR_ERROR":
-    return{
-      ...state,
-      error:null
-    }
+      return {
+        ...state,
+        error: null,
+      };
 
     default:
       return state;
@@ -77,7 +82,7 @@ export const loadReducer = (state = { state: "working" }, action) => {
         loading: false,
         user: action.payload.user,
         success: action.payload.success,
-        isAuthenticated: true
+        isAuthenticated: true,
       };
     case LOAD_USER_FAILED:
       return {
@@ -96,17 +101,17 @@ export const logoutReducer = (state = { state: "working" }, action) => {
     case LOGOUT_USER_SUCCESS:
       return {
         success: action.payload.success,
-        message: action.payload.message
+        message: action.payload.message,
       };
     case LOGOUT_USER_FAILED:
       return {
         error: action.payload,
       };
-      case "CLEAR_LOGGED_MESSAGE":
-      return{
-        success:false,
+    case "CLEAR_LOGGED_MESSAGE":
+      return {
+        success: false,
         message: null,
-      }
+      };
     default:
       return state;
   }

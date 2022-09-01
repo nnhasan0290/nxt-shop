@@ -45,6 +45,7 @@ const Registering = () => {
       alert.show("Login with your email and password now");
       setTimeout(() => {
         router.push("/login");
+        dispatch("CLEAR_SUCCESS");
       }, 1000);
     }
     if (error) {
