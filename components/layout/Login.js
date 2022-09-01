@@ -31,10 +31,6 @@ const Login = () => {
       alert.error(error);
     }
     dispatch(loadUser());
-    if (isLoggedOut.success) {
-      alert.show(isLoggedOut.message);
-      dispatch({ type: "CLEAR_LOGGED_MESSAGE" });
-    }
   }, [error, data, isLoggedOut]);
   return (
     <div className="flex justify-center items-center bg-[#f9f9f9]">
