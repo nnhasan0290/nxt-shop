@@ -81,8 +81,9 @@ export const loadUser = () => async (dispatch) => {
 //LOAD USER
 export const logoutUser = () => async (dispatch) => {
   try {
-    const { data } = await axios.get(
+    const { data } = await axios.post(
       `${process.env.NEXT_PUBLIC_GITPOD_HOST}/api/user/logout`,
+      {},
       {
         withCredentials: true,
       }
