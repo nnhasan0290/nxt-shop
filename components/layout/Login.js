@@ -10,8 +10,9 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { loading, error, data } = useSelector((state) => state.loginUser);
+  const { isAuthenticated, user } = useSelector((state) => state.loadUser);
 
-  const { success, message } = useSelector((state) => state.logoutUser);
+  const isLoggedOut = useSelector((state) => state.logoutUser);
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -29,17 +30,19 @@ const Login = () => {
     if (error) {
       alert.error(error);
     }
-    if (success) {
-      alert.show(message);
+    dispatch(loadUser());
+    if (isLoggedOut.success) {
+      alert.show(isLoggedOut.message);
       dispatch({ type: "CLEAR_LOGGED_MESSAGE" });
     }
-  }, [error, data, success]);
+  }, [error, data, isLoggedOut]);
   return (
     <div className="flex justify-center items-center bg-[#f9f9f9]">
       <div className="p-5 my-10 bg-white border rounded-sm shadow-3xl md:basis-1/2">
         {isAuthenticated ? (
           <div>
             <p>
+              {" "}
               You are logged in as{" "}
               <span className="text-lg uppercase text-[#081828] p-5">
                 {user.fname + " " + user.lname}
