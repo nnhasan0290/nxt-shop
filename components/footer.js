@@ -15,7 +15,7 @@ const Contact = () => {
           ></Image>
         </a>
       </div>
-      <a className="" href="mailto:mymailforabhi@gmail.com">
+      <a className="" href="mailto:nazmulhasan0290@gmail.com">
         <button className="text-white bg-[#172635] py-3 px-10 text-xl rounded-md hover:bg-[#0167f3] transition duration-300">
           Contact me{" "}
         </button>
