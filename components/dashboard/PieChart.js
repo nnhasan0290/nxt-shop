@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { adminAllProduct } from "../../redux/actions/adminAction";
 import { getOrders } from "../../redux/actions/orderAction";
 import { adminAllUsers } from "../../redux/actions/adminAction.js";
+import Loader from "../layout/Loader";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -50,40 +51,46 @@ export function PieChart() {
     dispatch(adminAllUsers());
   }, []);
   return (
-    <div className="sm:w-[80%] sm:float-right">
-      <div className="w-full text-center">
-        <h2 className="big-heading">Dashboard</h2>
-      </div>
-      <div className="w-full rounded-md bg-[#0167f3] my-2 p-3 text-center text-white text-lg">
-        <h2>Total Amount: ${totalAmount}</h2>
-      </div>
-      <div className="justify-center capitalize sm:space-x-5 sm:flex">
-        <a
-          href="/admin/allproduct"
-          className="bg-[#081828] text-white p-10 rounded-full w-[120px] h-[120px] flex items-center justify-center text-center mx-auto sm:mx-0 my-3 hover:bg-[#0167f3] transition duration-300"
-        >
-          {" "}
-          products <br /> {products?.length}
-        </a>
-        <a
-          href="/admin/orders"
-          className="bg-[#081828] text-white p-10 rounded-full w-[120px] h-[120px] flex items-center justify-center text-center  mx-auto sm:mx-0 my-3 hover:bg-[#0167f3] transition duration-300"
-        >
-          Orders <br /> {order?.length}
-        </a>
-        <a
-          href="/admin/users"
-          className="bg-[#081828] text-white p-10 rounded-full w-[120px] h-[120px] flex items-center justify-center text-center mx-auto sm:mx-0 my-3 hover:bg-[#0167f3] transition duration-300"
-        >
-          Users <br /> {users?.length}
-        </a>
-      </div>
-      <div className="w-[100%] m-auto sm:w-[70%] my-5">
-        <LineChart amount={totalAmount} />
-      </div>
-      <div className="sm:w-[30%] m-auto w-[90%] my-5">
-        <Pie data={data} />
-      </div>
-    </div>
+    <>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="sm:w-[80%] sm:float-right">
+          <div className="w-full text-center">
+            <h2 className="big-heading">Dashboard</h2>
+          </div>
+          <div className="w-full rounded-md bg-[#0167f3] my-2 p-3 text-center text-white text-lg">
+            <h2>Total Amount: ${totalAmount}</h2>
+          </div>
+          <div className="justify-center capitalize sm:space-x-5 sm:flex">
+            <a
+              href="/admin/allproduct"
+              className="bg-[#081828] text-white p-10 rounded-full w-[120px] h-[120px] flex items-center justify-center text-center mx-auto sm:mx-0 my-3 hover:bg-[#0167f3] transition duration-300"
+            >
+              {" "}
+              products <br /> {products?.length}
+            </a>
+            <a
+              href="/admin/orders"
+              className="bg-[#081828] text-white p-10 rounded-full w-[120px] h-[120px] flex items-center justify-center text-center  mx-auto sm:mx-0 my-3 hover:bg-[#0167f3] transition duration-300"
+            >
+              Orders <br /> {order?.length}
+            </a>
+            <a
+              href="/admin/users"
+              className="bg-[#081828] text-white p-10 rounded-full w-[120px] h-[120px] flex items-center justify-center text-center mx-auto sm:mx-0 my-3 hover:bg-[#0167f3] transition duration-300"
+            >
+              Users <br /> {users?.length}
+            </a>
+          </div>
+          <div className="w-[100%] m-auto sm:w-[70%] my-5">
+            <LineChart amount={totalAmount} />
+          </div>
+          <div className="sm:w-[30%] m-auto w-[90%] my-5">
+            <Pie data={data} />
+          </div>
+        </div>
+      )}
+    </>
   );
 }
