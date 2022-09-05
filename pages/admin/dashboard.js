@@ -9,11 +9,11 @@ const Dashboard = () => {
     <Fragment>
       <Head>
         <title>Admin Dashboard</title>
-        <link rel="icon" href="/logo.svg" />
+        <link rel="icon" href="/favicon.svg" />
       </Head>
       <main>
         <Sidebar />
-        <PieChart/>
+        <PieChart />
       </main>
     </Fragment>
   );

@@ -27,6 +27,9 @@ const Sidebar = () => {
   }, [router]);
   return (
     <>
+      <a className="fixed top-[10px] left-[10px] sm:hidden block z-50" href="/">
+        <img src="/favicon.svg" alt="" className="w-[50px]  " />
+      </a>
       <div className="w-[20%] border hidden fixed sm:block h-full top-0 bottom-0 overflow-auto p-3 box-border ">
         <a href="/">
           <Image

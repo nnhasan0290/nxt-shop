@@ -8,11 +8,11 @@ const Dashboard = () => {
     <Fragment>
       <Head>
         <title>Admin Products</title>
-        <link rel="icon" href="/logo.svg" />
+        <link rel="icon" href="/favicon.svg" />
       </Head>
       <main>
         <Sidebar />
-        <AllProduct/>
+        <AllProduct />
       </main>
     </Fragment>
   );

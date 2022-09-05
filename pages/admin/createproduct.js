@@ -8,7 +8,7 @@ const Dashboard = () => {
     <Fragment>
       <Head>
         <title>Admin Create Product</title>
-        <link rel="icon" href="/logo.svg" />
+        <link rel="icon" href="/favicon.svg" />
       </Head>
       <main>
         <Sidebar />

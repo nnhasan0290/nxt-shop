@@ -3,12 +3,11 @@ import {
   CurrencyDollarIcon,
   DocumentTextIcon,
 } from "@heroicons/react/outline";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { creatingProduct } from "../../redux/actions/productAction";
-import {useRouter} from "next/router";
-import {loadUser} from "../../redux/actions/userAction"
+import { useRouter } from "next/router";
+import { useAlert } from "react-alert";
 
 const DashContent = () => {
   const [inputImg, setInputImg] = useState([]);
@@ -19,7 +18,11 @@ const DashContent = () => {
   const [cat, setCat] = useState("");
   const router = useRouter();
   const dispatch = useDispatch();
-  const {loading, data, success, error} = useSelector((state) => state.newProducts);
+  const alert = useAlert();
+  const { loading, data, success, error } = useSelector(
+    (state) => state.newProducts
+  );
+  console.log(error);
 
   //Methods ===========================
   const fileUpload = (e) => {
@@ -52,6 +55,21 @@ const DashContent = () => {
     });
     dispatch(creatingProduct(myForm));
   };
+  useEffect(() => {
+    if (success) {
+      alert.success("PRODUCT CREATED SUCCESSFULLY");
+      setName("");
+      setPrice("");
+      setCat("");
+      setDesc("");
+      setStock("");
+      setInputImg([]);
+    }
+    if (error) {
+      alert.error(error);
+      dispatch({ type: "CLEAR_ERRORS" });
+    }
+  }, [success, error]);
 
   return (
     <div className="sm:w-[80%] flex justify-center items-center sm:float-right bg-[#f9f9f9] ">
@@ -73,7 +91,7 @@ const DashContent = () => {
             <CurrencyDollarIcon className="h-7" />
             <input
               onChange={(e) => setPrice(e.target.value)}
-              value={price>0 && price}
+              value={price > 0 && price}
               type="number"
               placeholder="price"
               min={20}
@@ -116,7 +134,7 @@ const DashContent = () => {
               name="stock"
               id="stock"
               placeholder="Stock"
-              value={stock>0 && stock}
+              value={stock > 0 && stock}
               min={1}
               max={50}
               required

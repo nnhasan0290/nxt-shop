@@ -7,7 +7,7 @@ import {
   GET_ALL_PRODUCT_ADMIN_SUCCESS,
   ADMIN_USER_REQ,
   ADMIN_USER_SUCCESS,
-  ADMIN_USER_FAIL
+  ADMIN_USER_FAIL,
 } from "../constants/adminCons";
 import axios from "axios";
 
@@ -29,8 +29,9 @@ export const adminAllProduct = () => async (dispatch) => {
 export const deleteProduct = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_ADMIN_PRODUCT_REQ });
-    const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_GITPOD_HOST}/api/admin/product/delete/${id}`
+    const { data } = await axios.delete(
+      `${process.env.NEXT_PUBLIC_GITPOD_HOST}/api/admin/product/delete/${id}`,
+      { withCredentials: true }
     );
     dispatch({ type: DELETE_ADMIN_PRODUCT, payload: data });
   } catch (error) {
@@ -43,13 +44,15 @@ export const deleteProduct = (id) => async (dispatch) => {
 
 export const adminAllUsers = () => async (dispatch) => {
   try {
-    dispatch({type:ADMIN_USER_REQ});
-    const {data} = await axios.get(`${process.env.NEXT_PUBLIC_GITPOD_HOST}/api/admin/users`);
-    dispatch({type: ADMIN_USER_SUCCESS,payload: data});
-  } catch(error){
-    dispatch({type: ADMIN_USER_FAIL, payload: error.response.data.error});
+    dispatch({ type: ADMIN_USER_REQ });
+    const { data } = await axios.get(
+      `${process.env.NEXT_PUBLIC_GITPOD_HOST}/api/admin/users`
+    );
+    dispatch({ type: ADMIN_USER_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: ADMIN_USER_FAIL, payload: error.response.data.error });
   }
-}
+};
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: "CLEAR_ERRORS" });
 };

@@ -22,7 +22,7 @@ export const creatingProduct = (myForm) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.post(
-      "https://3001-nnhasan0290-nextecommer-oyfekk44ino.ws-us62.gitpod.io/api/product/create",
+      `${process.env.NEXT_PUBLIC_GITPOD_HOST}/api/product/create`,
       myForm,
       config
     );

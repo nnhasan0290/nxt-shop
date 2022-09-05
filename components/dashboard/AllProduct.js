@@ -1,8 +1,12 @@
 import { TrashIcon } from "@heroicons/react/outline";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {useAlert} from "react-alert";
-import { adminAllProduct, clearErrors, deleteProduct } from "../../redux/actions/adminAction";
+import { useAlert } from "react-alert";
+import {
+  adminAllProduct,
+  clearErrors,
+  deleteProduct,
+} from "../../redux/actions/adminAction";
 
 const AllProduct = () => {
   const dispatch = useDispatch();
@@ -11,15 +15,19 @@ const AllProduct = () => {
     (state) => state.adminProducts
   );
 
-  const {message} = useSelector(state => state.adminDeleteProduct);
+  const { message, error } = useSelector((state) => state.adminDeleteProduct);
 
   useEffect(() => {
-    if(message){
-        alert.show(message);
-        dispatch(clearErrors())
+    if (error) {
+      alert.error("PLEASE LOGIN TO DELETE");
+      dispatch(clearErrors());
+    }
+    if (message) {
+      alert.show(message);
+      dispatch({ type: "CLEAR_MESSAGE" });
     }
     dispatch(adminAllProduct());
-  }, [message]);
+  }, [message, error]);
   return (
     <div className="sm:w-[80%] sm:float-right">
       <h2 className="text-center big-heading">All Products</h2>
@@ -35,8 +43,11 @@ const AllProduct = () => {
             <div className="text-center basis-1/6">Action</div>
           </div>
           {products &&
-            products.map((each,i) => (
-              <div key={i} className="justify-start items-center px-10 py-3 capitalize border-t md:flex">
+            products.map((each, i) => (
+              <div
+                key={i}
+                className="justify-start items-center px-10 py-3 capitalize border-t md:flex"
+              >
                 <div className="text-center md:text-start basis-1/3">
                   {each._id}
                 </div>
@@ -45,10 +56,13 @@ const AllProduct = () => {
                   {each.stock}
                 </div>
                 <div className="text-center basis-1/6">{each.price}</div>
-                <div onClick={() => {
+                <div
+                  onClick={() => {
                     dispatch(deleteProduct(each._id));
-                }} className="text-center cursor-pointer basis-1/6">
-                    <TrashIcon className="m-auto h-4 text-red-500 cursor-pointe" />
+                  }}
+                  className="text-center cursor-pointer basis-1/6"
+                >
+                  <TrashIcon className="m-auto h-4 text-red-500 cursor-pointe" />
                 </div>
               </div>
             ))}

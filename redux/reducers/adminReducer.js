@@ -7,7 +7,7 @@ import {
   GET_ALL_PRODUCT_ADMIN_SUCCESS,
   ADMIN_USER_REQ,
   ADMIN_USER_SUCCESS,
-  ADMIN_USER_FAIL
+  ADMIN_USER_FAIL,
 } from "../constants/adminCons";
 
 export const adminProductReducer = (state = {}, action) => {
@@ -32,7 +32,6 @@ export const adminProductReducer = (state = {}, action) => {
   }
 };
 
-
 export const adminDeleteProductReducer = (state = {}, action) => {
   switch (action.type) {
     case DELETE_ADMIN_PRODUCT_REQ:
@@ -55,27 +54,32 @@ export const adminDeleteProductReducer = (state = {}, action) => {
         ...state,
         error: null,
       };
+    case "CLEAR_MESSAGE":
+      return {
+        ...state,
+        message: null,
+      };
     default:
       return state;
   }
 };
 
-export const adminUserReducer = (state={},action) => {
-  switch(action.type){
+export const adminUserReducer = (state = {}, action) => {
+  switch (action.type) {
     case ADMIN_USER_REQ:
-    return{loading: true}
+      return { loading: true };
     case ADMIN_USER_SUCCESS:
-    return{
-      loading: false,
-      users: action.payload.user,
-      success: action.payload.success
-    }
+      return {
+        loading: false,
+        users: action.payload.user,
+        success: action.payload.success,
+      };
     case ADMIN_USER_FAIL:
-    return{
-      loading: false,
-      error: action.payload,
-    }
-    default: 
-    return{...state}
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return { ...state };
   }
-}
+};
